@@ -46,6 +46,7 @@ myApp.controller('CalculatorController', function ($scope, $window) {
             //url: 'http://localhost:52361/Aclservices.asmx/AuthenticatePatronService',
             url: 'http://sirez-server2/AmericanCenter/Aclservices.asmx/AuthenticatePatronService',
             params: { 'lastName': lastName, 'loginType': loginType, 'Id': Id }
+
         }).then(function (response) {
             var Rdata = response.data.replace(/(&lt;)/g, "<");
             Rdata = Rdata.replace(/(&gt;)/g, ">").replace('<?xml version="1.0" encoding="utf-8"?>', '').replace('</string>', '').replace('<string xmlns="http://tempuri.org/">', '').replace('<?xml version="1.0" encoding="UTF-8"?>', '').replace(/\n/g, '');
