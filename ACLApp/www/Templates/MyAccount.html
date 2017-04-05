@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:">-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.1/angular-cookies.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="../scripts/MyAccount.js"></script>
+    
+</head>
+<body ng-app="MyAccount" ng-controller="MyAccountCtrl">
+    <div class="container">
+        <div>
+            <table class="table">
+
+                <tr>
+                    <td>Name<br />{{fullname}}</td>
+                </tr>
+                <tr> <td>Email Id<br />{{EmailId}}</td></tr>
+                <tr> <td>Active Address<br />{{ActiveAddress}}</td></tr>
+                <tr>  <td>Permanent Address<br />{{PermanentAddress}}</td></tr>
+                <tr>
+                    <td>Cell Phone<br />{{CellPhone}}</td>
+                </tr>
+                <tr>
+                    <td><input type="button"  value="Logout" ng-click="Logout()" /><button class="btn btn-danger center" ng-click="back()">Back</button><br /><br />  </td>
+
+                </tr>
+
+            </table>
+            
+        </div>
+    </div>
+</body>
+</html>

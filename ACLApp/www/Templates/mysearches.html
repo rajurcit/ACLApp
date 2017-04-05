@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:">-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <script src="../scripts/mysearches.js"></script>
+</head>
+<body ng-app="mysearches" ng-controller="mysearchesCtrl">
+    <div class="container table-responsive">
+  <div>
+      <button class="btn btn-danger center" ng-click="back()">Back</button><br /><br />
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Search</th>
+                  <th>Search Type</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="item in MysearchesDetails">
+                  <td>{{item.searchString.__text}}</td>
+                  <td>{{item.searchType.__text}}</td>
+                  <td><a href="#{{item.searchType.__text}}">Re-Run</a> | <a href="#{{item.searchPage.__text}}">Edit</a>  | <a href="#{{item.savedSearchId.__text}}">Delete</a></td>
+              </tr>
+          </tbody>
+
+      </table>
+  </div>
+    </div>
+</body>
+</html>

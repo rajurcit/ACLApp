@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Subject</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="../scripts/SearchAuthor.js"></script>
+    <script src="../scripts/AClServices.js"></script>
+</head>
+<body ng-app="AclApp" ng-controller="SearchAuthorCtrl">
+    <input type="text" placeholder="Author's Last Name'" class="form-control" ng-model="searchArg1" /><br />
+    <input type="text" placeholder="Author's First Name'" class="form-control" ng-model="searchArgt2" /><br />
+
+    <button class="btn btn-danger center" ng-click="SearchAuthor()">Basic Search</button> 
+    <button class="btn btn-danger center" ng-click="back()">Back</button><br /><br />
+    <div ng-hide="divhead" style="background-color:cornflowerblue">
+        <span>Database: My Library Catalog</span><br />
+        <span>{{totalHits}} Results found</span><br />
+        <span>Author({{searchArg}})</span><br />
+    </div><br />
+    <div ng-repeat="item in bookDetails">
+        <p>
+            <a href="#{{item.headingId.__text}}" alt="{{item.headingId.__text}}">{{item.headingText.__text}}</a><br /><spna style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"><b>Titles:</b> {{item.headingCount.__text}}</spna>
+            <br /><b>Type: </b> {{item.headingType.__text}}<br />
+        </p><br />
+    </div>
+    <div style="color:red" ng-hide="diverror">{{ErrorMessage}}</div>
+</body>
+</html>

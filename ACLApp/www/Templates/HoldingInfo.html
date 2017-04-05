@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Subject</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script src="../Contents/scripts/angular.min.js"></script>
+    <script src="../Contents/scripts/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-sanitize.js"></script>
+    <script src="../Contents/scripts/HoldingInfo.js"></script>   
+    <script src="../Contents/scripts/AClServices.js"></script>
+</head>
+<body ng-app="AclApp" ng-controller="holdingInfoCtrl">  
+    <input type="button" value="Back" ng-click="back()" class="btn btn-primary" /> 
+    <br />
+    <b>Title:</b> <span ng-bind-html="Title"></span> <br />
+    <b>Author:</b> <span ng-bind-html="Author"></span> <br />
+    <b>Description:</b> <span ng-bind-html="Description"></span> <br />
+    <b> ISBN:</b> <span ng-bind-html="ISBN"></span> <br />
+    <b> Publisher:</b> <span ng-bind-html="Publisher"></span> <br />
+    <b>Contents: </b><span ng-bind-html="Contents"></span> <br />
+    <b>Subject:</b> <span ng-bind-html="Subject"></span> <br />
+       
+    <div style="color:red" ng-hide="diverror">{{ErrorMessage}}</div><br /><br />
+    <h1>Holding Info details</h1>
+    <b>databaseName:</b> <span ng-bind-html="databaseName"></span> <br />
+    <b>locationName:</b> <span ng-bind-html="locationName"></span> <br />
+    <b>callNumber:</b> <span ng-bind-html="callNumber"></span> <br />
+    <b>updateLocation:</b> <span ng-bind-html="updateLocation"></span> <br />
+     <!--<div ng-bind-html="GetHoldingData"></div>-->
+</body>
+</html>

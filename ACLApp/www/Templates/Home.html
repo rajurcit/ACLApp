@@ -1,0 +1,38 @@
+﻿<div class="">
+    <h2>FeaturedProducts</h2>
+    <div ng-repeat="ProductList in GetHomeProductList.FeaturedProducts">
+         <ul>
+            <li class="list-group-item">
+                ID: {{ProductList.ProductId}}<br />
+                ProductName: {{ProductList.ProductName}}<br />
+                <a href="#/ProductDeatils/{{ProductList.ProductId}}">
+                    <img src="http://staging.sirez.com/babyhugzshopping/BhzImages/Products/small/{{ProductList.ProductImage}}" alt="{{ProductList.ProductImage}}" />
+                </a>
+            </li>
+        </ul> 
+    </div>   
+    <h2>New ArrivalProducts</h2>
+    <div ng-repeat="ProductList in GetHomeProductList.NewArrivalProducts">
+        <ul>
+            <li class="list-group-item">
+                ID: {{ProductList.ProductId}}<br />
+                ProductName: {{ProductList.ProductName}}<br />
+                <a href="#/ProductDeatils/{{ProductList.ProductId}}">
+                    <img src="http://staging.sirez.com/babyhugzshopping/BhzImages/Products/small/{{ProductList.ProductImage}}" alt="{{ProductList.ProductImage}}" />
+                </a>
+            </li>
+        </ul>
+    </div>   
+    <h2>HotProducts</h2>
+    <div ng-repeat="ProductList in GetHomeProductList.HotProducts">
+        <ul>
+            <li class="list-group-item">
+                ID: {{ProductList.ProductId}}<br />
+                ProductName: {{ProductList.ProductName}}<br />
+                <a href="#/ProductDeatils/{{ProductList.ProductId}}">
+                    <img src="http://staging.sirez.com/babyhugzshopping/BhzImages/Products/small/{{ProductList.ProductImage}}" alt="{{ProductList.ProductImage}}" />
+                </a>
+            </li>
+        </ul>
+    </div> 
+</div>

@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Deatils Book</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="../scripts/SearchBook.js"></script>
+    <script src="../scripts/AClServices.js"></script>
+     
+</head>
+<body ng-app="AclApp" ng-controller="Searchctrl"><br />
+     <input type="text"  placeholder="Search" class="form-control" ng-model="searchArg" /><br />
+    within <select  ng-model="ddlsearchType" class="form-control" ng-options="item.searchName.__text for item in searchType">
+               <option value="">--Select--</option>
+    </select><br />
+    <!--<select  class="form-control">
+        <option ng-model="ddlsearchType" data-ng-repeat="item in searchType" value="{{item.searchCode.__text}}">{{item.searchName.__text}}</option>
+    </select>--> 
+    <button class="btn btn-danger center" ng-click="SearchBasic()">Basic</button> 
+    <button class="btn btn-danger center" ng-click="back()">Back</button><br /><br />
+     <div ng-hide="divhead" style="background-color:cornflowerblue">
+         <span>Database: My Library Catalog</span><br />
+         <span>{{totalHits}} Results found</span><br />
+         <span>{{ddlsearchTexts}}({{searchArg}})</span><br />
+     </div><br />
+    <div ng-repeat="item in bookDetails">
+        <p><a href="HoldingInfo.html#/HoldingInfo?Holding={{item.bibId.__text}}"  alt="{{item.bibId.__text}}">{{item.bibText1.__text}}</a><br /><spna style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"><b>Auther:</b> {{item.bibText2.__text}}</spna>
+        <br /><b>Publisher Date : </b> {{item.bibText3.__text}}<br />
+        <br />{{item.callNumber.__text}}<br />
+        {{item.locationName.__text}}</p><br />
+    </div>
+    <div style="color:red"ng-hide="diverror">{{ErrorMessage}}</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:">-->
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />-->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="../scripts/angular-cookies.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>-->
+    <script src="../scripts/xml2json.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="../scripts/ACL-login.js"></script>
+    <script>
+//ajax_post();
+function ajax_post(){
+    debugger;
+    var url = "http://64.94.37.21:7014/vxws/AuthenticatePatronService";
+    var params = '<?xml version="1.0" encoding="UTF-8"?><ser:serviceParameters xmlns:ser="http://www.endinfosys.com/Voyager/serviceParameters"><ser:parameters><ser:parameter key="pin">1<ser:value></ser:value></ser:parameter></ser:parameters> <ser:patronIdentifier lastName="Mishra"><ser:authFactor type="I">D16C0259</ser:authFactor></ser:patronIdentifier></ser:serviceParameters>';
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //http.setRequestHeader("Content-length", params.length);
+    //http.setRequestHeader("Connection", "close");
+
+    http.onreadystatechange = function () {//Call a function when the state changes.
+        if (http.readyState == 4 && http.status == 200) {
+            alert(http.responseText);
+        }
+    }
+    http.send(params);
+}
+    </script>
+</head>
+<body ng-app="AclApp" ng-controller="loginctrl">
+    <div class="container">
+        <form name="Myuser" ng-submit="login(user)"  class="simple-form">
+            <label>Log in using my: <select name="user.loginTypes" ng-model="user.loginTypes" class="form-control" ng-options="item.ID as item.Title for item in loginType" required></select></label><br />
+            
+            <label>ID: <input type="password" class="form-control" ng-init="user.ID='D16C0259'" ng-model="user.ID" required/></label><br />
+            <span ng-show="Myuser.user.ID.$touched && Myuser.user.ID.$invalid">The Id is required.</span>
+            <label>Last Name:  <input type="text" ng-init="user.lastname='Mishra'" class="form-control" ng-model="user.lastname" required/></label>{{user.password}}<br />                         
+            <button style="text-align:center" class="btn btn-success">Login</button>
+            <br />  <br />
+            <div ng-hide="divfullname" >                
+                <p><b>Welcome to: </b><span  ng-model="fullname">{{fullname}}</span></p> <br />
+                 
+                <br /><input type="button" value="Basic" ng-click="BasicSearchBook()"  class="btn btn-primary"/>     
+                <br /><input type="button" value="Subject" ng-click="SearchSubject()"  class="btn btn-primary" />    
+                <br /><input type="button" value="Author" ng-click="SearchAuthor()" class="btn btn-primary" />   <br />
+                <input type="button" value="My Searches" ng-click="mysearches()" class="btn btn-primary" />   <br />
+                <input type="button" value="My Account" ng-click="MyAccount()" class="btn btn-primary" />  
+                <!--<br /><input type="button" value="HoldingInfo  Author" ng-click="HoldingInfo()" class="btn btn-primary" />-->     
+            </div>
+            <div ng-hide="divError">
+                <p style="color:red">{{Errormessage}}</p>
+            </div>
+
+        </form>
+
+
+    </div>
+</body>
+</html>
