@@ -4,10 +4,11 @@ AclApp.controller('Searchctrl', function ($scope, $http, $rootScope, $location, 
     $scope.divhead = true;
     GetsearchTypes();
     $scope.back = function () {         
-        $window.location.href = '/index.html';
+        window.location = '../index.html';
     }
  
     function GetsearchTypes() {
+     
         SearchPropertiesService.GetsearchTypes('203.115.101.198')
             .then(function (response) {
                 $scope.searchTypes = response.voyagerServiceData.serviceData;
@@ -58,7 +59,7 @@ AclApp.controller('Searchctrl', function ($scope, $http, $rootScope, $location, 
 
         $scope.searchCode = $scope.ddlsearchType.searchCode.__text;
         $scope.searchArg = $scope.searchArg;
-        $scope.maxResultsPerPage = 10;
+        $scope.maxResultsPerPage = 100;
         $scope.ddlsearchTexts = $scope.ddlsearchType.searchName.__text;
         basicSearch();
     }

@@ -9,7 +9,7 @@ AclApp.config(function ($routeProvider) {
 AclApp.controller('holdingInfoCtrl', ['$scope', '$http', '$location', '$window', function ($scope, $http, $location, $window) {
 
     $scope.back = function () {
-        $window.location.href = 'SearchBook.html';
+        window.location = "SearchBook.html";       
     }
     if ($location.search().Holding) {
         var bibId = $location.search().Holding;
@@ -18,8 +18,7 @@ AclApp.controller('holdingInfoCtrl', ['$scope', '$http', '$location', '$window',
     function GetHoldingInfo(bibId) {
         $http.get("http://64.94.37.21:7014/vxws/GetHoldingsService", {
             params: { 'bibId': bibId, 'link880sFlag': 'YYYY', 'dbCode': 'ZZZZ' }
-        }).then(function (response) {
-            debugger;
+        }).then(function (response) {             
             var x2js = new X2JS();
             $scope.Data = x2js.xml_str2json(response.data);
             $scope.holdingsDetails = $scope.Data.voyagerServiceData.serviceData;

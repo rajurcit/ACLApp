@@ -6,7 +6,7 @@
     function GetsearchTypes(clientIP) {
         var request = $http({
             method: "get",
-            url: "http://sirez-server2/AmericanCenter/Aclservices.asmx/SearchPropertiesService",
+            url: "http://192.168.72.6/AmericanCenter/Aclservices.asmx/SearchPropertiesService",
             params: {
                 'clientIP': clientIP,
             },

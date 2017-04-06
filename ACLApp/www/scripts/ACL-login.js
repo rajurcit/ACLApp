@@ -1,17 +1,21 @@
 ﻿var AclApp = angular.module('AclApp', ['ngCookies']);
-AclApp.controller('loginctrl', function ($scope, $http, $location, $cookies, $cookieStore, $window) {  
+AclApp.controller('loginctrl', function ($scope, $http, $location, $cookies, $cookieStore, $window) {
     $scope.divfullname = false;
     $scope.divError = true;
-    
-    $scope.loginType = [{ ID: 'B', Title: 'Barcode' }, { ID: 'I', Title: 'Institution Id' }, { ID: 'S', Title: 'Social Security Number' }, ];    
-    
+
+    $scope.loginType = [{ ID: 'B', Title: 'Barcode' }, { ID: 'I', Title: 'Institution Id' }, { ID: 'S', Title: 'Social Security Number' }, ];
+
     $scope.mysearches = function () {
-     //   $window.location.href = 'mysearches.html';
+          $window.location.href = 'mysearches.html';
     }
     $scope.MyAccount = function () {
-         
+
         $window.location.href = 'MyAccount.html';
     }
+    $scope.Login = function () {
+        $window.location.href = 'Login.html';
+    }
+
     $scope.BasicSearchBook = function () {
         $window.location.href = 'SearchBook.html';
     }
@@ -25,18 +29,16 @@ AclApp.controller('loginctrl', function ($scope, $http, $location, $cookies, $co
         $window.location.href = 'Templates/HoldingInfo.html';
     }
 
-    $scope.login = function () {        
-        var loginTypes = $scope.user.loginTypes;
-        var lastName = $scope.user.lastname;
-        var Id = $scope.user.ID;
+    $scope.login = function () {
+        var loginTypes = 'I';//$scope.user.loginTypes;
+        var lastName = 'Mishra';//$scope.user.lastname;
+        var Id = 'D16C0259';// $scope.user.ID;
         login(lastName, loginTypes, Id);
+
     }
 
     function login(lastName, loginType, Id) {
-        $http({
-            method: 'get',
-            //url: 'http://localhost:52361/Aclservices.asmx/AuthenticatePatronService',
-            url: 'http://sirez-server2/AmericanCenter/Aclservices.asmx/AuthenticatePatronService',
+        $http.get("http://sirez-server2/AmericanCenter/Aclservices.asmx/AuthenticatePatronService", {
             params: { 'lastName': lastName, 'loginType': loginType, 'Id': Id }
         }).then(function (response) {
             var Rdata = response.data.replace(/(&lt;)/g, "<");
@@ -65,7 +67,6 @@ AclApp.controller('loginctrl', function ($scope, $http, $location, $cookies, $co
                 $scope.divError = false;
                 $scope.divfullname = true;
             }
-
         }, function errorCallback(response) {
             alert('Not connected Services!!!!!!');
         });

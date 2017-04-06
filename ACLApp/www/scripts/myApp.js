@@ -1,6 +1,6 @@
 ﻿ 
-var myApp = angular.module('myApp',[]);
-myApp.controller('CalculatorController', function ($scope, $window) {
+var myApp = angular.module('myApp', ['ngCookies']);
+myApp.controller('CalculatorController', ['$scope', '$http', '$window', function ($scope, $http, $window, $cookies) {
 
     $scope.Amcenter = function () {
          
@@ -15,6 +15,12 @@ myApp.controller('CalculatorController', function ($scope, $window) {
 
     $scope.mysearches = function () {
         $window.location.href = 'Templates/mysearches.html';
+    }
+    $scope.Login = function () {
+        $window.location.href = 'Templates/Login.html';
+    }
+    $scope.back = function () {
+        $window.location.href = '../index.html';
     }
     $scope.MyAccount = function () {
 
@@ -38,16 +44,48 @@ myApp.controller('CalculatorController', function ($scope, $window) {
         var lastName = $scope.user.lastname;
         var Id = $scope.user.ID;
         //login(lastName, loginTypes, Id);
+        test();
     }
-
-    function login(lastName, loginType, Id) {
-        $http({
-            method: 'get',
-            //url: 'http://localhost:52361/Aclservices.asmx/AuthenticatePatronService',
-            url: 'http://sirez-server2/AmericanCenter/Aclservices.asmx/AuthenticatePatronService',
-            params: { 'lastName': lastName, 'loginType': loginType, 'Id': Id }
-
+    function test() {
+        debugger;
+        $http.get("http://192.168.72.6/AmericanCenter/Aclservices.asmx/AuthenticatePatronService", {
+            params: { 'lastName': 'Mishra', 'loginType': 'I', 'Id': 'D16C0259' }
         }).then(function (response) {
+            debugger;
+            var Rdata = response.data.replace(/(&lt;)/g, "<");
+            Rdata = Rdata.replace(/(&gt;)/g, ">").replace('<?xml version="1.0" encoding="utf-8"?>', '').replace('</string>', '').replace('<string xmlns="http://tempuri.org/">', '').replace('<?xml version="1.0" encoding="UTF-8"?>', '').replace(/\n/g, '');
+            var x2js = new X2JS();
+            $scope.loginData = x2js.xml_str2json(Rdata);
+            $scope.loginDetails = $scope.loginData.voyagerServiceData.serviceData;
+            if ($scope.loginDetails) {
+                $scope.divfullname = false;
+                $scope.fullname = $scope.loginDetails.fullName.__text;
+                $cookies.fullname = $scope.loginDetails.fullName.__text;
+                $scope.patronHomeUbId = $scope.loginDetails.patronIdentifier._patronHomeUbId;
+                $cookies.patronHomeUbId = $scope.loginDetails.patronIdentifier._patronHomeUbId;
+                $scope.patronId = $scope.loginDetails.patronIdentifier._patronId;
+                $cookies.patronId = $scope.loginDetails.patronIdentifier._patronId;
+                $scope.lastName = $scope.loginDetails.patronIdentifier._lastName;
+                $cookies.lastName = $scope.loginDetails.patronIdentifier._lastName;
+                $cookies.authFactorId = $scope.loginDetails.patronIdentifier.authFactor.__text;
+                $cookies.authFactorType = $scope.loginDetails.patronIdentifier.authFactor._type;
+
+                $scope.divError = true;
+            }
+            else {
+                $scope.Errormessage = $scope.loginData.voyagerServiceData.messages.message.__text;
+                $scope.divError = false;
+                $scope.divfullname = true;
+            }
+        }, function errorCallback(response) {
+            alert('some error!!!!!!');
+        });
+    }
+    function login(lastName, loginType, Id) {
+        debugger;
+        $http.get("http://192.168.72.6/AmericanCenter/Aclservices.asmx/AuthenticatePatronService", {
+            params: { 'lastName': lastName, 'loginType': loginType, 'Id': Id }
+        }).then(function (response) {             
             var Rdata = response.data.replace(/(&lt;)/g, "<");
             Rdata = Rdata.replace(/(&gt;)/g, ">").replace('<?xml version="1.0" encoding="utf-8"?>', '').replace('</string>', '').replace('<string xmlns="http://tempuri.org/">', '').replace('<?xml version="1.0" encoding="UTF-8"?>', '').replace(/\n/g, '');
             var x2js = new X2JS();
@@ -83,4 +121,4 @@ myApp.controller('CalculatorController', function ($scope, $window) {
     //    $scope.answer = Calculator.square($scope.number);
     //    $scope.add = Calculator.add($scope.number);
     //}
-});
+}]);

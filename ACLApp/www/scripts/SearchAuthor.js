@@ -4,7 +4,7 @@ AclApp.controller('SearchAuthorCtrl', ['$scope', '$http', '$window', function ($
     $scope.diverror = true;
     $scope.divhead = true;
     $scope.back = function () {
-        $window.location.href = '/index.html';
+        $window.location.href = '../index.html';
     }
     $scope.SearchAuthor = function () {
 
@@ -23,8 +23,31 @@ AclApp.controller('SearchAuthorCtrl', ['$scope', '$http', '$window', function ($
 
 
         $scope.searchArgType = 'AND';
-        $scope.maxResultsPerPage = 10;
+        $scope.maxResultsPerPage = 100;
         basicSearch();
+        test();
+    }
+    function test() {
+        debugger;
+        $http.get("http://192.168.72.6/AmericanCenter/Aclservices.asmx/AuthenticatePatronService", {
+            params: { 'lastName': 'Mishra', 'loginType': 'I', 'Id': 'D16C0259' }
+        }).then(function (response) {
+            debugger;
+            var x2js = new X2JS();
+            $scope.bookData = x2js.xml_str2json(response.data);
+            $scope.bookDetails = $scope.bookData.voyagerServiceData.serviceData;
+            if ($scope.bookDetails) {
+                $scope.divhead = false;
+                $scope.totalHits = $scope.bookDetails.totalHits.__text;
+                $scope.bookDetails = $scope.bookData.voyagerServiceData.serviceData.headingSearchResults.results.result;
+            }
+            else {
+                $scope.diverror = false;
+                $scope.ErrorMessage = $scope.bookData.voyagerServiceData.messages.message.__text;
+            }
+        }, function errorCallback(response) {
+            alert('some error!!!!!!');
+        });
     }
     function basicSearch() {
         $http.get("http://64.94.37.21:7014/vxws/SearchService", {

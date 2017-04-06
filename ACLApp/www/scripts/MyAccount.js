@@ -1,22 +1,22 @@
-﻿angular.module('MyAccount', ['ngCookies'])
- .controller('MyAccountCtrl', ['$scope', '$http', '$location', '$cookies', '$window', function ($scope, $http, $location, $cookies, $window) {
+﻿angular.module('MyAccount', ['ngStorage'])
+ .controller('MyAccountCtrl', ['$scope', '$http', '$location', '$localStorage', '$window', function ($scope, $http, $location, $localStorage, $window) {
       
      $scope.back = function () {
-         $window.location.href = '/index.html';
+         $window.location.href = '../index.html';
      }
      $scope.Logout = function () {
 
-         $cookies.patronId = "";
-         $cookies.patronHomeUbId = "";
-         $cookies.fullname = "";
-         $cookies.lastName = "";
-         $cookies.authFactorId = "";
-         $cookies.authFactorType = "";         
-         $scope.divfullname = true;
-         $window.location.href = 'ACL-login.html';
+         $localStorage.patronId = "";
+         $localStorage.patronHomeUbId = "";
+         $localStorage.fullname = "";
+         $localStorage.lastName = "";
+         $localStorage.authFactorId = "";
+         $localStorage.authFactorType = "";
+         $localStorage.divfullname = true;
+         $window.location.href = 'login.html';
      }
 
-     MyAccount($cookies.patronId, $cookies.patronHomeUbId);
+     MyAccount($localStorage.patronId, $localStorage.patronHomeUbId);
 
      function MyAccount(patronId, patronHomeUbId) {
          $http({

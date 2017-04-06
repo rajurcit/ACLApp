@@ -1,30 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <!--
-        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
-        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
-    -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>ACLApp</title>
-        <script src="scripts/angular.min.js"></script>
-        <script src="scripts/myApp.js"></script>
-    </head>
-    <body ng-app="myApp" ng-controller="CalculatorController">
-        <div class="app">
-            <h1><input type="button" style="width:200px;height:100px;font-size:xx-large;" value="Am Center" ng-click="Amcenter()" /><br /></h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+<head>
+   
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/w3.css" rel="stylesheet" />
+
+    <title>ACLApp</title>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/xml2json.min.js"></script>
+    <script src="scripts/angular-cookies.js"></script>
+    <script src="scripts/ngStorage.min.js"></script>
+    <script src="scripts/myApp.js"></script>
+    <script>
+       // ajax_post();
+        function ajax_post() {
+            debugger;
+            var url = "http://64.94.37.21:7014/vxws/AuthenticatePatronService";
+            var params = '<?xml version="1.0" encoding="UTF-8"?><ser:serviceParameters xmlns:ser="http://www.endinfosys.com/Voyager/serviceParameters"><ser:parameters><ser:parameter key="pin">1<ser:value></ser:value></ser:parameter></ser:parameters> <ser:patronIdentifier lastName="Mishra"><ser:authFactor type="I">D16C0259</ser:authFactor></ser:patronIdentifier></ser:serviceParameters>';
+            var http = new XMLHttpRequest();
+            http.open("POST", url, true);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            //http.setRequestHeader("Content-length", params.length);
+            //http.setRequestHeader("Connection", "close");
+
+            http.onreadystatechange = function () {//Call a function when the state changes.
+                if (http.readyState == 4 && http.status == 200) {
+                    alert(http.responseText);
+                }
+            }
+            http.send(params);
+        }
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="CalculatorController">
+    <div class="w3-container">
+        <form name="Myuser" ng-submit="login(user)">
+            <h2>American center</h2>
+
+            <div class="">
+                <p><input type="button" value="Login" ng-click="Login()" class="w3-button w3-block w3-black" /></p>
             </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-        <script type="text/javascript" src="scripts/index.js"></script>
-    </body>
+            <div class="">
+                <p><input type="button" class="w3-button w3-block w3-teal" value="Basic search" ng-click="BasicSearchBook()" /></p>
+            </div>
+
+            <div class="">
+                <p><input type="button" value="Subject search" ng-click="SearchSubject()" class="w3-button w3-block w3-black" /></p>
+            </div>
+
+            <div class="">
+                <p><input type="button" value="Author search" ng-click="SearchAuthor()" class="w3-button w3-block w3-teal" /></p>
+            </div>
+            <div ng-hide="divError">
+                <p style="color:red">{{Errormessage}}</p>
+            </div>
+        </form>
+    </div>
+    <!--<div class="container">
+        <form name="Myuser" ng-submit="login(user)">
+            <div ng-hide="divfullname">
+                <br />
+                <br />
+                <br />
+                <br />   <br />
+            </div>
+            
+
+        </form>
+
+
+    </div>-->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+</body>
 </html>

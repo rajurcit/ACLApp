@@ -1,14 +1,14 @@
-﻿angular.module('mysearches', ['ngCookies'])
- .controller('mysearchesCtrl', ['$scope', '$http', '$location', '$cookies', '$window', function ($scope, $http, $location, $cookies, $window) {
+﻿angular.module('mysearches', ['ngStorage'])
+ .controller('mysearchesCtrl', ['$scope', '$http', '$location', '$localStorage', '$window', function ($scope, $http, $location, $localStorage, $window) {
      $scope.back = function () {
-         $window.location.href = '/index.html';
+         $window.location.href = '../index.html';
      }
   
-     Mysearches($cookies.lastName, $cookies.authFactorType, $cookies.patronHomeUbId, $cookies.patronId, $cookies.authFactorId);
+     Mysearches($localStorage.lastName, $localStorage.authFactorType, $localStorage.patronHomeUbId, $localStorage.patronId, $localStorage.authFactorId);
      function Mysearches(lastName, loginType, patronHomeUbId, patronId, Id) {
          $http({
              method: 'get',
-             url: 'http://sirez-server2/AmericanCenter/Aclservices.asmx/Mysearches',
+             url: 'http://192.168.72.6/AmericanCenter/Aclservices.asmx/Mysearches',
              params: { 'lastName': lastName, 'loginType': loginType, 'patronHomeUbId': patronHomeUbId, 'patronId': patronId, 'Id': Id }
          }).then(function (response) {
              var Rdata = response.data.replace(/(&lt;)/g, "<");

@@ -1,7 +1,7 @@
 ﻿var AclApp = angular.module('AclApp', []);
 AclApp.controller('SearchSubjectCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $scope.back = function () {
-        $window.location.href = '/index.html';
+        $window.location.href = '../index.html';
     }
     $scope.diverror = true;
     $scope.divhead = true;
@@ -10,7 +10,7 @@ AclApp.controller('SearchSubjectCtrl', ['$scope', '$http', '$window', function (
         $scope.searchCode = 'SUBJ';
         $scope.searchArg = $scope.searchArg;
         $scope.searchArgType = 'AND';
-        $scope.maxResultsPerPage = 10;
+        $scope.maxResultsPerPage = 100;
         basicSearch();
     }
 

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Subject</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/w3.css" rel="stylesheet" />
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/angular-route.min.js"></script>
+    <script src="../scripts/angular-cookies.js"></script>
+    <script src="../scripts/ngStorage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <script src="../scripts/login.js"></script>
+    <script src="../scripts/AClServices.js"></script>
+</head>
+<body ng-app="AclApp" ng-controller="SearchAuthorCtrl">
+    <form name="Myuser" class="w3-container w3-card-4" ng-submit="login(user)">
+        Log in using my: <select name="user.loginTypes" ng-model="user.loginTypes" class="w3-input w3-border" ng-options="item.ID as item.Title for item in loginType" required>
+                             <option value="">--Select--</option>
+        </select><br />
+
+        ID: <input type="password" class="w3-input w3-border" ng-init="user.ID='D16C0259'" ng-model="user.ID" required /><br />
+        <span ng-show="Myuser.user.ID.$touched && Myuser.user.ID.$invalid">The Id is required.</span>
+        Last Name:  <input type="text" ng-init="user.lastname='Mishra'" class="w3-input w3-border" ng-model="user.lastname" required />{{user.password}}<br /><br />
+        <button style="text-align:center" class="w3-button w3-block w3-teal">Login</button>
+        <br />  <br />
+        <div ng-hide="divfullname">
+            <p><b>Welcome </b><span ng-model="fullname">{{fullname}}</span></p> <br />
+            <input type="button" value="My Searches" ng-click="mysearches()" class="w3-button w3-block w3-black" />   <br />
+            <input type="button" value="My Account" ng-click="MyAccount()" class="w3-button w3-block w3-black" /><br />
+            <!--<button class="w3-button w3-block w3-teal" ng-click="back1()">Back</button><br /><br />-->
+            <a href="../index.html" class="w3-button w3-block w3-teal">Back</a>
+            <!--<br /><input type="button" value="HoldingInfo  Author" ng-click="HoldingInfo()" class="btn btn-primary" />-->
+        </div>
+        <div ng-hide="divError">
+            <p style="color:red">{{Errormessage}}</p>
+        </div>
+
+    </form>
+    
+    <div style="color:red" ng-hide="diverror">{{ErrorMessage}}</div>
+</body>
+</html>
